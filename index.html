@@ -53,11 +53,11 @@
             <form id="entryForm" style="width: 100%;">
                 <select id="village">
                     <option value="">ग्राम चुनें / Select Village</option>
-                    <option>ALNIYA / अलनिया</option><option>DEVRAKHEDI / देवराखेड़ी</option><option>DUBADI / दुबड़ी</option><option>KANKADKHEDA / कंकड़खेड़ा</option><option>CHARKHEDI / चरखेड़ी</option><option>SADANKHEDI / सदनखेड़ी</option><option>RAMPURA / रामपुरा</option><option>KANKRIYA / कांकरिया</option><option>DHABLADHEER / ढबलाधीर</option><option>CHAYNI / चायनी</option><option>FARAD / फराद</option><option>KHAJURI / खजुरी</option><option>LALAKHEDI / लालाखेड़ी</option><option>KOTHADI / कोठड़ी</option><option>MANDLAKHEDI / मांडलाखेड़ी</option><option>JABDIYABHEEL / जाबड़ियाभील</option><option>JABADI / जाबड़ी</option><option>NANDNI / नंदनी</option><option>PRATAPPURA / प्रतापपुरा</option><option>ANANDIKHEDI / आनंदीखेड़ी</option><option>PIPLIYANAGAR / पिपलियानगर</option><option>JANGIKHEDI / जांगीखेड़ी</option><option>BAWADIYAMAINA / बावड़ियामैना</option>
+                    <option>ALNIYA</option><option>DEVRAKHEDI</option><option>DUBADI</option><option>KANKADKHEDA</option><option>CHARKHEDI</option><option>SADANKHEDI</option><option>RAMPURA</option><option>KANKRIYA</option><option>DHABLADHEER</option><option>CHAYNI</option><option>FARAD</option><option>KHAJURI</option><option>LALAKHEDI</option><option>KOTHADI</option><option>MANDLAKHEDI</option><option>JABDIYABHEEL</option><option>JABADI</option><option>NANDNI</option><option>PRATAPPURA</option><option>ANANDIKHEDI</option><option>PIPLIYANAGAR</option><option>JANGIKHEDI</option><option>BAWADIYAMAINA</option>
                 </select>
                 <select id="foc">
                     <option value="">FOC चुनें / Select FOC</option>
-                    <option>NANDNI / नंदनी</option><option>ALNIYA / अलनिया</option><option>CHARKHEDI / चरखेड़ी</option><option>DHABLADHEER / ढबलाधीर</option><option>JABDIYABHEEL / जाबड़ियाभील</option><option>FARAD / फराद</option><option>KOTHADI / कोठड़ी</option><option>PIPLIYANAGAR / पिपलियानगर</option>
+                    <option>NANDNI</option><option>ALNIYA</option><option>CHARKHEDI</option><option>DHABLADHEER</option><option>JABDIYABHEEL</option><option>FARAD</option><option>KOTHADI</option><option>PIPLIYANAGAR</option>
                 </select>
                 <input type="text" id="incharge" placeholder="FOC प्रभारी / FOC Incharge">
                 <input type="text" id="loc" placeholder="लोकेशन (DTR/11KV/LT) / Location">
@@ -107,7 +107,7 @@
                 remark: document.getElementById('remark').value 
             };
             
-            if(!d.village || !d.incharge || !d.location) return alert("कृपया सभी जानकारी भरें!");
+            if(!d.village || !d.foc || !d.incharge || !d.location) return alert("कृपया सभी जानकारी भरें!");
             
             document.getElementById('subBtn').style.display = 'none';
             document.getElementById('loader').style.display = 'block';
