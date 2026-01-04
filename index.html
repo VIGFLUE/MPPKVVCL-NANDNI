@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MPPKVVCL-NANDNI Dashboard</title>
+    <style>
+        :root { --blue: #007bff; --red: #d9534f; --green: #28a745; --gray: #f4f7f6; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: var(--gray); display: flex; justify-content: center; }
+        
+        #blocker { display: none; position: fixed; inset: 0; background: #fff; z-index: 9999; padding: 40px; text-align: center; flex-direction: column; justify-content: center; align-items: center; }
+        @media screen and (min-width: 769px), screen and (orientation: landscape) { #blocker { display: flex; } }
+
+        .app-box { width: 100%; max-width: 420px; min-height: 100vh; background: white; position: relative; display: flex; flex-direction: column; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+        .screen { display: none; padding: 25px; flex-direction: column; align-items: center; text-align: center; height: 100%; justify-content: flex-start; }
+        .active { display: flex; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .btn { width: 100%; padding: 15px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 15px; font-size: 16px; transition: 0.2s; }
+        .btn-primary { background: var(--blue); color: white; }
+        .btn-admin { background: #f0f0f0; color: #666; font-size: 12px; padding: 8px; border: 1px solid #ddd; margin-top: 40px; width: auto; }
+        
+        input, select, textarea { width: 100%; padding: 14px; margin: 10px 0; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; box-sizing: border-box; outline: none; }
+        
+        .search-bar { position: sticky; top: 0; background: white; z-index: 10; padding-bottom: 10px; border-bottom: 2px solid var(--gray); margin-bottom: 15px; width: 100%; }
+        .card { background: #fff; border: 1px solid #eee; padding: 15px; border-radius: 12px; width: 100%; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 15px; text-align: left; box-sizing: border-box; }
+        .data-list { width: 100%; overflow-y: auto; height: calc(100vh - 200px); }
+        
+        .tick-box { background: var(--green); color: white; width: 65px; height: 65px; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 35px; margin: 50px auto 20px; }
+        .loader { border: 4px solid #f3f3f3; border-top: 4px solid var(--blue); border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; display: none; margin: 15px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <div id="blocker">
+        <div style="font-size: 60px;">📱</div>
+        <h2 style="color:var(--red)">Portrait Mode Only</h2>
+        <p>Please use this form in <b>portrait mode</b> on a mobile device.</p>
+    </div>
+
+    <div class="app-box">
+        <div id="home" class="screen active">
+            <div style="font-size: 50px; color: #ffc107; margin-top: 50px;">⚡</div>
+            <h1>MPPKVVCL-NANDNI</h1>
+            <p>झूलते तार लोकेशन डैशबोर्ड</p>
+            <button class="btn btn-primary" onclick="nav('form-screen')">New Entry (नयी एंट्री)</button>
+            <button class="btn btn-admin" onclick="openAdmin()">Admin Records Login</button>
+        </div>
+
+        <div id="form-screen" class="screen">
+            <h3 style="color:var(--red); width: 100%; border-bottom: 2px solid #eee; padding-bottom: 10px;">डेटा एंट्री फॉर्म</h3>
+            <form id="entryForm" style="width: 100%;">
+                <select id="village">
+                    <option value="">ग्राम चुनें</option>
+                    <option>ALNIYA</option><option>DEVRAKHEDI</option><option>DUBADI</option><option>KANKADKHEDA</option><option>CHARKHEDI</option><option>SADANKHEDI</option><option>RAMPURA</option><option>KANKRIYA</option><option>DHABLADHEER</option><option>CHAYNI</option><option>FARAD</option><option>KHAJURI</option><option>LALAKHEDI</option><option>KOTHADI</option><option>MANDLAKHEDI</option><option>JABDIYABHEEL</option><option>JABADI</option><option>NANDNI</option><option>PRATAPPURA</option><option>ANANDIKHEDI</option><option>PIPLIYANAGAR</option><option>JANGIKHEDI</option><option>BAWADIYAMAINA</option>
+                </select>
+                <select id="foc">
+                    <option value="">FOC चुनें</option>
+                    <option>NANDNI</option><option>ALNIYA</option><option>CHARKHEDI</option><option>DHABLADHEER</option><option>JABDIYABHEEL</option><option>FARAD</option><option>KOTHADI</option><option>PIPLIYANAGAR</option>
+                </select>
+                <input type="text" id="incharge" placeholder="FOC प्रभारी का नाम">
+                <input type="text" id="loc" placeholder="लोकेशन विवरण">
+                <textarea id="remark" placeholder="रिमार्क लिखें"></textarea>
+                <div id="loader" class="loader"></div>
+                <button type="button" class="btn btn-primary" id="subBtn" onclick="saveData()">Submit Entry</button>
+                <button type="button" class="btn" style="background:#ddd" onclick="nav('home')">Cancel</button>
+            </form>
+        </div>
+
+        <div id="admin-screen" class="screen">
+            <div class="search-bar">
+                <h3 style="margin:0 0 10px 0;">Entries Summary</h3>
+                <input type="text" id="searchInput" onkeyup="filterData()" placeholder="गाँव या प्रभारी का नाम लिखें...">
+                <div style="display:flex; gap:10px;">
+                    <button class="btn btn-primary" style="margin-top:0; padding:8px; font-size:12px;" onclick="fetchData()">Refresh 🔄</button>
+                    <button class="btn" style="margin-top:0; padding:8px; font-size:12px; background:#333; color:white;" onclick="nav('home')">Back</button>
+                </div>
+            </div>
+            <div id="dataDisplay" class="data-list">Fetching entries...</div>
+        </div>
+
+        <div id="success" class="screen">
+            <div class="tick-box">✓</div>
+            <h3>Data Saved Successfully</h3>
+            <button class="btn btn-primary" style="width: 70%;" onclick="location.reload()">Home Page</button>
+        </div>
+    </div>
+
+    <script>
+        const URL = "https://script.google.com/macros/s/AKfycbyVUKLkiN6EaOnZBi3y7Lcum-uye9CwGWGzQ-xuP6s7t3qmrLWUxHBHTjTRnjnRgmrsfw/exec";
+        let allRecords = [];
+
+        function nav(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        async function saveData() {
+            const d = { village: document.getElementById('village').value, foc: document.getElementById('foc').value, incharge: document.getElementById('incharge').value, location: document.getElementById('loc').value, remark: document.getElementById('remark').value };
+            if(!d.village || !d.incharge || !d.location) return alert("All fields are mandatory!");
+            
+            document.getElementById('subBtn').style.display = 'none';
+            document.getElementById('loader').style.display = 'block';
+
+            try {
+                await fetch(URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(d) });
+                nav('success');
+            } catch (e) {
+                alert("Submit Failed!");
+                document.getElementById('subBtn').style.display = 'block';
+                document.getElementById('loader').style.display = 'none';
+            }
+        }
+
+        async function openAdmin() {
+            const p = prompt("Password:");
+            if(p === "admin789") { nav('admin-screen'); fetchData(); }
+            else if(p !== null) { alert("Wrong Password!"); }
+        }
+
+        async function fetchData() {
+            document.getElementById('dataDisplay').innerHTML = "Refreshing Data...";
+            try {
+                const res = await fetch(URL);
+                allRecords = await res.json();
+                renderData(allRecords);
+            } catch (e) {
+                document.getElementById('dataDisplay').innerHTML = "Error loading data.";
+            }
+        }
+
+        function renderData(data) {
+            let html = "";
+            data.reverse().forEach(item => {
+                html += `<div class="card">
+                    <div style="font-size:11px; color:var(--blue); font-weight:bold;">📅 ${new Date(item.time).toLocaleString('hi-IN')}</div>
+                    <b>🏠 गाँव:</b> ${item.village} | <b>🏢 FOC:</b> ${item.foc}<br>
+                    <b>👤 प्रभारी:</b> ${item.incharge}<br>
+                    <b>📍 लोकेशन:</b> ${item.loc}<br>
+                    <b>📝 रिमार्क:</b> ${item.remark}
+                </div>`;
+            });
+            document.getElementById('dataDisplay').innerHTML = html || "No records found.";
+        }
+
+        function filterData() {
+            const term = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = allRecords.filter(r => 
+                r.village.toLowerCase().includes(term) || 
+                r.incharge.toLowerCase().includes(term) ||
+                r.loc.toLowerCase().includes(term)
+            );
+            renderData(filtered);
+        }
+    </script>
+</body>
+</html>
