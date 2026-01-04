@@ -36,7 +36,7 @@
     <div id="blocker">
         <div style="font-size: 60px;">📱</div>
         <h2 style="color:var(--red)">Portrait Mode Only</h2>
-        <p>Please use this form in <b>portrait mode</b> on a mobile device.</p>
+        <p>कृपया मोबाइल को सीधा (Portrait) पकड़ें।</p>
     </div>
 
     <div class="app-box">
@@ -44,46 +44,47 @@
             <div style="font-size: 50px; color: #ffc107; margin-top: 50px;">⚡</div>
             <h1>MPPKVVCL-NANDNI</h1>
             <p>झूलते तार लोकेशन डैशबोर्ड</p>
-            <button class="btn btn-primary" onclick="nav('form-screen')">New Entry (नयी एंट्री)</button>
-            <button class="btn btn-admin" onclick="openAdmin()">Admin Records Login</button>
+            <button class="btn btn-primary" onclick="nav('form-screen')">New Entry / नयी प्रविष्टि</button>
+            <button class="btn btn-admin" onclick="openAdmin()">Admin Login / एडमिन लॉगिन</button>
         </div>
 
         <div id="form-screen" class="screen">
-            <h3 style="color:var(--red); width: 100%; border-bottom: 2px solid #eee; padding-bottom: 10px;">डेटा एंट्री फॉर्म</h3>
+            <h3 style="color:var(--red); width: 100%; border-bottom: 2px solid #eee; padding-bottom: 10px;">झूलते तार लोकेशन विवरण</h3>
             <form id="entryForm" style="width: 100%;">
                 <select id="village">
-                    <option value="">ग्राम चुनें</option>
-                    <option>ALNIYA</option><option>DEVRAKHEDI</option><option>DUBADI</option><option>KANKADKHEDA</option><option>CHARKHEDI</option><option>SADANKHEDI</option><option>RAMPURA</option><option>KANKRIYA</option><option>DHABLADHEER</option><option>CHAYNI</option><option>FARAD</option><option>KHAJURI</option><option>LALAKHEDI</option><option>KOTHADI</option><option>MANDLAKHEDI</option><option>JABDIYABHEEL</option><option>JABADI</option><option>NANDNI</option><option>PRATAPPURA</option><option>ANANDIKHEDI</option><option>PIPLIYANAGAR</option><option>JANGIKHEDI</option><option>BAWADIYAMAINA</option>
+                    <option value="">ग्राम चुनें / Select Village</option>
+                    <option>ALNIYA / अलनिया</option><option>DEVRAKHEDI / देवराखेड़ी</option><option>DUBADI / दुबड़ी</option><option>KANKADKHEDA / कंकड़खेड़ा</option><option>CHARKHEDI / चरखेड़ी</option><option>SADANKHEDI / सदनखेड़ी</option><option>RAMPURA / रामपुरा</option><option>KANKRIYA / कांकरिया</option><option>DHABLADHEER / ढबलाधीर</option><option>CHAYNI / चायनी</option><option>FARAD / फराद</option><option>KHAJURI / खजुरी</option><option>LALAKHEDI / लालाखेड़ी</option><option>KOTHADI / कोठड़ी</option><option>MANDLAKHEDI / मांडलाखेड़ी</option><option>JABDIYABHEEL / जाबड़ियाभील</option><option>JABADI / जाबड़ी</option><option>NANDNI / नंदनी</option><option>PRATAPPURA / प्रतापपुरा</option><option>ANANDIKHEDI / आनंदीखेड़ी</option><option>PIPLIYANAGAR / पिपलियानगर</option><option>JANGIKHEDI / जांगीखेड़ी</option><option>BAWADIYAMAINA / बावड़ियामैना</option>
                 </select>
                 <select id="foc">
-                    <option value="">FOC चुनें</option>
-                    <option>NANDNI</option><option>ALNIYA</option><option>CHARKHEDI</option><option>DHABLADHEER</option><option>JABDIYABHEEL</option><option>FARAD</option><option>KOTHADI</option><option>PIPLIYANAGAR</option>
+                    <option value="">FOC चुनें / Select FOC</option>
+                    <option>NANDNI / नंदनी</option><option>ALNIYA / अलनिया</option><option>CHARKHEDI / चरखेड़ी</option><option>DHABLADHEER / ढबलाधीर</option><option>JABDIYABHEEL / जाबड़ियाभील</option><option>FARAD / फराद</option><option>KOTHADI / कोठड़ी</option><option>PIPLIYANAGAR / पिपलियानगर</option>
                 </select>
-                <input type="text" id="incharge" placeholder="FOC प्रभारी का नाम">
-                <input type="text" id="loc" placeholder="लोकेशन विवरण">
-                <textarea id="remark" placeholder="रिमार्क लिखें"></textarea>
+                <input type="text" id="incharge" placeholder="FOC प्रभारी / FOC Incharge">
+                <input type="text" id="loc" placeholder="लोकेशन (DTR/11KV/LT) / Location">
+                <textarea id="remark" placeholder="अन्य विवरण / Remarks"></textarea>
                 <div id="loader" class="loader"></div>
-                <button type="button" class="btn btn-primary" id="subBtn" onclick="saveData()">Submit Entry</button>
-                <button type="button" class="btn" style="background:#ddd" onclick="nav('home')">Cancel</button>
+                <button type="button" class="btn btn-primary" id="subBtn" onclick="saveData()">Submit / जमा करें</button>
+                <button type="button" class="btn" style="background:#ddd" onclick="nav('home')">Cancel / रद्द करें</button>
             </form>
         </div>
 
         <div id="admin-screen" class="screen">
             <div class="search-bar">
-                <h3 style="margin:0 0 10px 0;">Entries Summary</h3>
-                <input type="text" id="searchInput" onkeyup="filterData()" placeholder="गाँव या प्रभारी का नाम लिखें...">
+                <h3 style="margin:0 0 10px 0;">Entries Summary / विवरण सारांश</h3>
+                <input type="text" id="searchInput" onkeyup="filterData()" placeholder="खोजें (Search)...">
                 <div style="display:flex; gap:10px;">
-                    <button class="btn btn-primary" style="margin-top:0; padding:8px; font-size:12px;" onclick="fetchData()">Refresh 🔄</button>
-                    <button class="btn" style="margin-top:0; padding:8px; font-size:12px; background:#333; color:white;" onclick="nav('home')">Back</button>
+                    <button class="btn btn-primary" style="margin-top:0; padding:8px; font-size:12px;" onclick="fetchData()">Refresh / रिफ्रेश</button>
+                    <button class="btn" style="margin-top:0; padding:8px; font-size:12px; background:#333; color:white;" onclick="nav('home')">Back / पीछे</button>
                 </div>
             </div>
-            <div id="dataDisplay" class="data-list">Fetching entries...</div>
+            <div id="dataDisplay" class="data-list">डेटा लोड हो रहा है...</div>
         </div>
 
         <div id="success" class="screen">
             <div class="tick-box">✓</div>
-            <h3>Data Saved Successfully</h3>
-            <button class="btn btn-primary" style="width: 70%;" onclick="location.reload()">Home Page</button>
+            <h3>डेटा सफलतापूर्वक सुरक्षित किया गया</h3>
+            <p>Data Saved Successfully</p>
+            <button class="btn btn-primary" style="width: 70%;" onclick="location.reload()">Home Page / मुख्य पृष्ठ</button>
         </div>
     </div>
 
@@ -98,8 +99,15 @@
         }
 
         async function saveData() {
-            const d = { village: document.getElementById('village').value, foc: document.getElementById('foc').value, incharge: document.getElementById('incharge').value, location: document.getElementById('loc').value, remark: document.getElementById('remark').value };
-            if(!d.village || !d.incharge || !d.location) return alert("All fields are mandatory!");
+            const d = { 
+                village: document.getElementById('village').value, 
+                foc: document.getElementById('foc').value, 
+                incharge: document.getElementById('incharge').value, 
+                location: document.getElementById('loc').value, 
+                remark: document.getElementById('remark').value 
+            };
+            
+            if(!d.village || !d.incharge || !d.location) return alert("कृपया सभी जानकारी भरें!");
             
             document.getElementById('subBtn').style.display = 'none';
             document.getElementById('loader').style.display = 'block';
@@ -115,13 +123,13 @@
         }
 
         async function openAdmin() {
-            const p = prompt("Password:");
+            const p = prompt("Password / पासवर्ड:");
             if(p === "admin789") { nav('admin-screen'); fetchData(); }
-            else if(p !== null) { alert("Wrong Password!"); }
+            else if(p !== null) { alert("Wrong Password / गलत पासवर्ड!"); }
         }
 
         async function fetchData() {
-            document.getElementById('dataDisplay').innerHTML = "Refreshing Data...";
+            document.getElementById('dataDisplay').innerHTML = "Loading Data...";
             try {
                 const res = await fetch(URL);
                 allRecords = await res.json();
@@ -136,7 +144,8 @@
             data.reverse().forEach(item => {
                 html += `<div class="card">
                     <div style="font-size:11px; color:var(--blue); font-weight:bold;">📅 ${new Date(item.time).toLocaleString('hi-IN')}</div>
-                    <b>🏠 गाँव:</b> ${item.village} | <b>🏢 FOC:</b> ${item.foc}<br>
+                    <b>🏠 ग्राम:</b> ${item.village} <br>
+                    <b>🏢 FOC:</b> ${item.foc}<br>
                     <b>👤 प्रभारी:</b> ${item.incharge}<br>
                     <b>📍 लोकेशन:</b> ${item.loc}<br>
                     <b>📝 रिमार्क:</b> ${item.remark}
